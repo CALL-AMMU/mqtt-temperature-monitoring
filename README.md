@@ -62,29 +62,29 @@ The code includes comments and explanations for better understanding.
 The README file (not provided here) should contain detailed instructions on setting up and running the system.
 This is a basic implementation and can be extended for features like data visualization, historical data storage, etc.
 
-1. Publisher Program (publisher.py):
+## Publisher Program (publisher.py):
    
 import paho.mqtt.client as mqtt
 import time
 from random import randint  # Simulate sensor data (if no real sensor)
 
-# MQTT Broker Configuration
+//MQTT Broker Configuration
 broker_address = "localhost"
 broker_port = 1883
 topic = "hotel/room/temperature"
 
-# Simulated Sensor Data Generation (if no real sensor)
+//Simulated Sensor Data Generation (if no real sensor)
 def generate_temperature():
     return randint(18, 28)  # Adjust temperature range as needed
 
-# MQTT Client Callback
+//MQTT Client Callback
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT Broker!")
     else:
         print("Failed to connect, return code", rc)
 
-# Main Program
+//Main Program
 def main():
     client = mqtt.Client()
     client.on_connect = on_connect
@@ -105,30 +105,30 @@ def main():
 if __name__ == "__main__":
     main()
     
-2. Subscriber Program (subscriber.py):
+## Subscriber Program (subscriber.py):
    
 import paho.mqtt.client as mqtt
 import time
 import datetime
 import json
 
-# MQTT Broker Configuration
+//MQTT Broker Configuration
 broker_address = "localhost"
 broker_port = 1883
 topic = "hotel/room/temperature"
 
-# Alarm Threshold and Duration
+//Alarm Threshold and Duration
 threshold = 25  # °C
 duration = 5  # Minutes (5 data points)
 
-# Data Storage (replace with preferred persistence method)
+//Data Storage (replace with preferred persistence method)
 data_file = "temperature_data.json"
 
-# Alarm Flag and Last Alarm Time
+//Alarm Flag and Last Alarm Time
 alarm_raised = False
 last_alarm_time = None
 
-# MQTT Client Callback
+//MQTT Client Callback
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT Broker!")
@@ -155,7 +155,7 @@ def on_message(client, userdata, msg):
             print(f"ALARM! Temperature exceeded {threshold}°C for {duration} minutes.")
             # Implement alarm notification logic (e.g., send email, SMS, or trigger light/sound)
 
-# Main Program
+//Main Program
 def main():
     client = mqtt.Client()
     client.on_connect = on_connect
@@ -167,11 +167,11 @@ def main():
 if __name__ == "__main__":
     main()
     
-3. Server Program (server.py):
+## Server Program (server.py):
 
 from flask import Flask, jsonify
 
-# Data Storage (replace with preferred persistence method)
+//Data Storage (replace with preferred persistence method)
 data_file = "temperature_data.json"
 
 app = Flask(__name__)
